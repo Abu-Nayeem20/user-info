@@ -56,7 +56,7 @@ const useFirebase = () => {
         const user = {email};
         // console.log(user)
         
-        fetch('http://localhost:5000/user', {
+        fetch('https://pacific-wave-63587.herokuapp.com/user', {
             method: method,
             headers: {
                 'content-type' : 'application/json'

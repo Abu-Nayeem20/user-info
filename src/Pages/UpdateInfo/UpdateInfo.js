@@ -23,7 +23,7 @@ const UpdateInfo = () => {
         dataForm.append('email', user.email);
         dataForm.append('image', img);
 
-        fetch('http://localhost:5000/users', {
+        fetch('https://pacific-wave-63587.herokuapp.com/users', {
         method: 'PUT',
         body: dataForm
         })

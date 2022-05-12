@@ -11,7 +11,7 @@ const Profile = () => {
     const [profile, setProfile] = useState({});
 
     useEffect( () => {
-        fetch(`http://localhost:5000/users/${user?.email}`)
+        fetch(`https://pacific-wave-63587.herokuapp.com/users/${user?.email}`)
         .then(res => res.json())
         .then(data => {
             setProfile(data);
