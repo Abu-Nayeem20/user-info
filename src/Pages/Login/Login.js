@@ -7,7 +7,7 @@ import './Login.css'
 
 const Login = () => {
 
-    const {signInUsingGoogle, setLoading, setError, error, loginWithEmailAndPassword, setUser } = useAuth();
+    const {signInUsingGoogle, setLoading, setError, error, loginWithEmailAndPassword, setUser, saveUser } = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -43,9 +43,9 @@ const Login = () => {
         const handleGoogleSignIn = () => {
             signInUsingGoogle()
             .then(result => {
-                // const user = result.user;
-                // console.log(user);
-                navigate(redirect_uri);
+                const user = result.user;
+                saveUser(user.email, "PUT");
+                navigate("/profile");
             })
     
         }

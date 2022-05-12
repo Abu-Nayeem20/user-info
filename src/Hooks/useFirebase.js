@@ -52,19 +52,19 @@ const useFirebase = () => {
     }, [auth]);
 
     //  // SAVE USER TO DATABASE
-    //  const saveUser = (displayName, email, method) => {
-    //     const user = {displayName, email};
-    //     // console.log(user)
+     const saveUser = (email, method) => {
+        const user = {email};
+        // console.log(user)
         
-    //     fetch('https://secret-mountain-73898.herokuapp.com/users', {
-    //         method: method,
-    //         headers: {
-    //             'content-type' : 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //     .then()
-    // };
+        fetch('http://localhost:5000/user', {
+            method: method,
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then()
+    };
 
     // LOGOUT
     const logOut = () => {
@@ -86,6 +86,7 @@ const useFirebase = () => {
         loading,
         setLoading,
         logOut,
+        saveUser,
         signInUsingGoogle,
         createAccountWithMail,
         loginWithEmailAndPassword

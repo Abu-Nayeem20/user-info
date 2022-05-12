@@ -6,14 +6,14 @@ import Menu from '../Shared/Menu/Menu';
 
 const Signup = () => {
 
-    const {signInUsingGoogle, createAccountWithMail, setLoading, setError, error, setUser } = useAuth();
+    const {signInUsingGoogle, createAccountWithMail, setLoading, setError, error, setUser, saveUser } = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
-    const redirect_uri = location.state?.from || '/home';
+    // const redirect_uri = location.state?.from || '/home';
 
     const handleEmailChange = e =>{
         setEmail(e.target.value);
@@ -39,8 +39,9 @@ const Signup = () => {
     .then((res) => {
       setLoading(true)
         setError('');
+        saveUser(email, "POST");
         setUser(res.user);
-        navigate(redirect_uri);
+        navigate("/update-info");
       })
       .catch((error) => {
         setError(error.message);
@@ -53,7 +54,9 @@ const Signup = () => {
     const handleGoogleSignIn = () => {
         signInUsingGoogle()
         .then(result => {
-            navigate(redirect_uri);
+            const user = result.user;
+            saveUser(user.email, "PUT");
+            navigate("/update-info");
         })
     }
 
