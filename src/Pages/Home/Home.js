@@ -5,6 +5,8 @@ import Menu from '../Shared/Menu/Menu';
 import './Home.css';
 
 const Home = () => {
+    
+    // console.log(process.env);
     return (
         <div className='home-content'>
             <div className='container'>
@@ -16,7 +18,7 @@ const Home = () => {
                         <h2> New here???</h2>
                         <h3>Create an account!</h3>
                         <Nav.Item as="li">
-                            <Nav.Link as={NavLink} to="/signin">Create Account</Nav.Link>
+                            <Nav.Link as={NavLink} to="/signup">Create Account</Nav.Link>
                             </Nav.Item>
                         </div>
                         </div>

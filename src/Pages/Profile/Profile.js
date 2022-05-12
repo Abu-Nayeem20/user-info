@@ -2,8 +2,12 @@ import React from 'react';
 import Menu from '../Shared/Menu/Menu';
 import img from '../../image/logo.png';
 import './Profile.css'
+import useAuth from '../../Hooks/useAuth';
 
 const Profile = () => {
+
+    const { user, logOut } = useAuth();
+
     return (
         <div className='container'>
             <Menu />
@@ -23,7 +27,7 @@ const Profile = () => {
                             </div>
                         </div>
                         <div>
-                        <button className='logout-btn'>Log Out</button>
+                        <button className='logout-btn' onClick={logOut}>Log Out</button>
                         </div>
                     </div>
                 </div>

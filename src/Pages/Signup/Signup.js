@@ -3,11 +3,10 @@ import { FormControl, InputGroup } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import Menu from '../Shared/Menu/Menu';
-import './Login.css'
 
-const Login = () => {
+const Signup = () => {
 
-    const {signInUsingGoogle, setLoading, setError, error, loginWithEmailAndPassword, setUser } = useAuth();
+    const {signInUsingGoogle, createAccountWithMail, setLoading, setError, error, setUser } = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,33 +22,40 @@ const Login = () => {
         setPassword(e.target.value);
     } 
 
-    const handleLoginWithEmailAndPassword = e =>{
-        loginWithEmailAndPassword(email,password)
-        .then((res) => {
-          setLoading(true)
-            setUser(res.user);
-            setError('');
-            navigate(redirect_uri);
-          })
-          .catch((error) => {
-            setError(error.message);
-          })
-          .finally(() => {
-            setLoading(false)
-          })
-          e.preventDefault();
-    }
-    
-        const handleGoogleSignIn = () => {
-            signInUsingGoogle()
-            .then(result => {
-                // const user = result.user;
-                // console.log(user);
-                navigate(redirect_uri);
-            })
-    
-        }
+    // Make a Strong Password before submit
 
+    const handleSubmitButton = e =>{
+        e.preventDefault();
+        // console.log(email, password);
+        if(password.length < 6){
+          setError('Password must be at least 6 characters');
+          return;
+        }
+        handleCreateAccoutWithMail();
+    }
+
+    const handleCreateAccoutWithMail = () => {
+        createAccountWithMail(email,password)
+    .then((res) => {
+      setLoading(true)
+        setError('');
+        setUser(res.user);
+        navigate(redirect_uri);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(()=> {
+        setLoading(false)
+      })
+    };
+
+    const handleGoogleSignIn = () => {
+        signInUsingGoogle()
+        .then(result => {
+            navigate(redirect_uri);
+        })
+    }
 
     return (
         <div className='loging'>
@@ -59,9 +65,9 @@ const Login = () => {
                     <div className="col-md-6 offset-md-3">
                         <div className="login-content">
                             <div>
-                                <h2 className='heading'>Login here!</h2>
+                                <h2 className='heading'>Create account!</h2>
                                 <p className='error-text'>{error}</p>
-                            <form onSubmit={handleLoginWithEmailAndPassword}>
+                            <form onSubmit={handleSubmitButton}>
                             <InputGroup className="mb-3">
                                 <InputGroup.Text id="basic-addon1"><i className="fa-solid fa-envelope"></i></InputGroup.Text>
                                 <FormControl
@@ -84,7 +90,7 @@ const Login = () => {
                                 aria-describedby="basic-addon2"
                                 />
                             </InputGroup>
-                            <button className='submit-btn' type='submit'>LogIn</button>
+                            <button className='submit-btn' type='submit'>SignUp</button>
                             </form>
                             <div className='google-login'>
                                 <h6>Login with Google!</h6>
@@ -99,4 +105,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;

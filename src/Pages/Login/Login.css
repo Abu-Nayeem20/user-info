@@ -42,3 +42,7 @@
     background-color: orange;
     color: aliceblue;
 }
+.error-text{
+    color: red;
+    padding: 10px 0;
+}
