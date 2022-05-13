@@ -1,6 +1,6 @@
-# Welcome to my Project=
+# Welcome to my Project
 
-Live Project [User Info](https://user-info123.web.app/).
+## Live Project [User Info](https://user-info123.web.app/).
 
 ## Technology Used:
 * React
